@@ -6,17 +6,18 @@ import * as XLSX from 'xlsx';
 export const ExportCSV = ({csvData, fileName}) => {
 
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    const fileExtension = '.xlsx';
+    const fileExtension = '.xls';
 
-    const exportToCSV = (csvData, fileName) => {
-        const ws = XLSX.utils.json_to_sheet(csvData);
-        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
-        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const data = new Blob([excelBuffer], {type: fileType});
-        FileSaver.saveAs(data, fileName + fileExtension);
-    }
-
+    const exportToExcel = function(csvData) {
+        console.log('Methods Start');
+        var myJsonString = JSON.stringify(csvData);
+        var blob = new Blob([myJsonString], {
+          type: "application/vnd.ms-excel;charset=utf-8"
+        });
+        saveAs(blob, "Report.xls");
+       
+      };
     return (
-        <Button variant="warning" onClick={(e) => exportToCSV(csvData,fileName)}>Export</Button>
+        <Button variant="warning" onClick={(e) => exportToExcel(csvData)}>Export</Button>
     )
 }

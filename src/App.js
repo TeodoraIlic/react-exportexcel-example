@@ -18,7 +18,6 @@ class App extends React.Component {
 
   state = {
     customers: this.customers(),
-    fileName: 'Customers'
   }
   
   render() {
@@ -31,7 +30,7 @@ class App extends React.Component {
                 <h2>Customers</h2>
             </div>
             <div className="col-md-4 center">
-                <ExportReactCSV csvData={this.state.customers} fileName={this.state.fileName} />
+                <ExportReactCSV csvData={this.state.customers}/>
             </div>
         </div>
         <Customers customers={this.customers()}/>
